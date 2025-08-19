@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from '../../components/ui/Button';
 import { Typography } from '../../components/ui/Typography';
-import { MOCK_DATA } from '../../constants';
 import { useAdminDispatchContext, useAdminStateContext } from '../../modules/admin';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import { MemberListItem } from '../../components/admin/MemberListItem';
+import { useMembersStateContext } from '../../modules/members';
 
 export const AdminPage = () => {
-  const members = MOCK_DATA.members;
+  const members = useMembersStateContext();
   const state = useAdminStateContext();
   const dispatch = useAdminDispatchContext();
 
@@ -26,7 +26,7 @@ export const AdminPage = () => {
       <Divider />
 
       <Stack gap={1.25} marginTop={2} sx={{ maxHeight: 'calc(100vh - 180px)', overflow: 'auto' }}>
-        {members.map((member) => (
+        {members.items.map((member: any) => (
           <MemberListItem
             key={member.id}
             memberId={member.id}

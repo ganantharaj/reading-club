@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import { Typography } from '../ui/Typography';
-import { MOCK_DATA } from '../../constants';
+import { useMembersStateContext } from '../../modules/members';
 
 const Row = styled(Paper)`
   border-radius: var(--radius);
@@ -20,9 +20,9 @@ type Props = {
 };
 
 export const MemberListItem = ({ memberId, onEdit }: Props) => {
-  const state = MOCK_DATA.members;
+  const state = useMembersStateContext();
 
-  const member = useMemo(() => state.find((m) => m.id === memberId), [state, memberId]);
+  const member = useMemo(() => state.items.find((m: any) => m.id === memberId), [state, memberId]);
   if (!member) return null;
 
   return (
