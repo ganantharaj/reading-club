@@ -13,10 +13,9 @@ export const MainPage = () => {
 
   return (
     <div>
-      This contains all the routes needed for Main Page and redirects to the Main page components
       <Box p={2}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2} gap={2}>
-          <Typography variant="h5">Members </Typography>
+          <Typography variant="h5">Members ({items.length})</Typography>
         </Stack>
 
         <Grid container spacing={2}>
