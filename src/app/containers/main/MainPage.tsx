@@ -1,5 +1,9 @@
+import { Typography } from '@mui/material';
 import { MemberCard } from '../../components/main/MemberCard';
 import { useMembersStateContext } from '../../modules/members';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 
 export const MainPage = () => {
   const { loading, items } = useMembersStateContext();
@@ -10,8 +14,18 @@ export const MainPage = () => {
   return (
     <div>
       This contains all the routes needed for Main Page and redirects to the Main page components
-      {/* Get the member list and display here */}
-      <MemberCard />
+      <Box p={2}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2} gap={2}>
+          <Typography variant="h5">Members </Typography>
+        </Stack>
+
+        <Grid container spacing={2}>
+          {items.map((member: any) => (
+            //Gautham --> Need to write a custom function to fetch all book of the specefic member
+            <MemberCard member={member} bookTitles={['book1', 'book2']} />
+          ))}
+        </Grid>
+      </Box>
     </div>
   );
 };
