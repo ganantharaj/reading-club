@@ -7,7 +7,15 @@ import React, {
   type Dispatch,
   type ReactNode,
 } from 'react';
-import { membersInitial, membersReducer } from './reducer';
+import {
+  deleteMember,
+  loadMembers,
+  membersInitial,
+  membersReducer,
+  setMembersError,
+  setMembersLoading,
+} from './reducer';
+import { MOCK_DATA } from '../../constants';
 
 type StateContext = {
   state: any;
@@ -15,6 +23,8 @@ type StateContext = {
 
 type DispatchContext = {
   dispatch: Dispatch<any>;
+  fetchAll: () => void;
+  remove: (id: number) => void;
 };
 
 const MembersStateContext = createContext<StateContext | undefined>(undefined);
@@ -23,13 +33,29 @@ const MembersDispatchContext = createContext<DispatchContext | undefined>(undefi
 export const MembersProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(membersReducer, membersInitial);
 
+  // For now mocked the data in-memory
+  const fetchAll = async () => {
+    dispatch(setMembersLoading(true));
+    try {
+      dispatch(loadMembers(MOCK_DATA.members));
+    } catch (e: any) {
+      dispatch(setMembersError(e?.message ?? 'Failed to fetch members'));
+    } finally {
+      dispatch(setMembersLoading(false));
+    }
+  };
+
+  const remove = (id: number): void => {
+    dispatch(deleteMember(id));
+  };
   useEffect(() => {
     // gautham -> fetch the members list and set it in the state or dispatch
+    fetchAll();
   }, []);
 
   return (
     <MembersStateContext.Provider value={{ state }}>
-      <MembersDispatchContext.Provider value={{ dispatch }}>
+      <MembersDispatchContext.Provider value={{ dispatch, fetchAll, remove }}>
         {children}
       </MembersDispatchContext.Provider>
     </MembersStateContext.Provider>
@@ -54,6 +80,5 @@ export const useMembersDispatchContext = () => {
     throw new Error('useMembersDispatchContext should be wrapped under Members Provider');
   }
 
-  const { dispatch } = dispatchContext;
-  return dispatch;
+  return { ...dispatchContext };
 };

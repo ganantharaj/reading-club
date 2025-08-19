@@ -1,5 +1,5 @@
 import { MOCK_DATA } from '../../constants';
-import type { MembersState, MembersAction } from './types';
+import { type MembersState, type MembersAction, type Member, MembersActionType } from './types';
 
 export const membersInitial: MembersState = {
   items: MOCK_DATA.members,
@@ -28,3 +28,23 @@ export const membersReducer = (state: MembersState, action: MembersAction): Memb
       return state;
   }
 };
+
+export const loadMembers = (payload: Member[]): MembersAction => ({
+  type: MembersActionType.LOAD_MEMBERS,
+  payload,
+});
+
+export const deleteMember = (id: number): MembersAction => ({
+  type: MembersActionType.DELETE_MEMBER,
+  payload: id,
+});
+
+export const setMembersLoading = (flag: boolean): MembersAction => ({
+  type: MembersActionType.SET_LOADING,
+  payload: flag,
+});
+
+export const setMembersError = (msg: string | null): MembersAction => ({
+  type: MembersActionType.SET_ERROR,
+  payload: msg,
+});

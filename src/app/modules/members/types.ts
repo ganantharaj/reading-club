@@ -19,3 +19,12 @@ export type MembersAction =
   | { type: 'DELETE_MEMBER'; payload: number }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null };
+
+export const MembersActionType = {
+  LOAD_MEMBERS: 'LOAD_MEMBERS',
+  ADD_MEMBER: 'ADD_MEMBER',
+  UPDATE_MEMBER: 'UPDATE_MEMBER',
+  DELETE_MEMBER: 'DELETE_MEMBER',
+  SET_LOADING: 'SET_LOADING',
+  SET_ERROR: 'SET_ERROR',
+} as const;

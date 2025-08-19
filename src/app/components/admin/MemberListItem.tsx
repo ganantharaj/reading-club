@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import { Typography } from '../ui/Typography';
-import { useMembersStateContext } from '../../modules/members';
+import { useMembersDispatchContext, useMembersStateContext } from '../../modules/members';
 
 const Row = styled(Paper)`
   border-radius: var(--radius);
@@ -21,6 +21,7 @@ type Props = {
 
 export const MemberListItem = ({ memberId, onEdit }: Props) => {
   const state = useMembersStateContext();
+  const { remove } = useMembersDispatchContext();
 
   const member = useMemo(() => state.items.find((m: any) => m.id === memberId), [state, memberId]);
   if (!member) return null;
@@ -45,7 +46,7 @@ export const MemberListItem = ({ memberId, onEdit }: Props) => {
           <IconButton
             aria-label="delete"
             onClick={() => {
-              console.log('Delete clicked');
+              remove(member.id);
             }}
           >
             <DeleteIcon />
