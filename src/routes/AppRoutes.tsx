@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { MainPage } from '../app/containers/main/MainPage';
 import { MainProvider } from '../app/modules/main';
 import { AdminPage } from '../app/containers/admin/AdminPage';
+import { AdminProvider } from '../app/modules/admin';
 
 export const AppRoutes = () => {
   return (
@@ -15,7 +16,14 @@ export const AppRoutes = () => {
         }
       />
 
-      <Route path="/admin" element={<AdminPage />} />
+      <Route
+        path="/admin"
+        element={
+          <AdminProvider>
+            <AdminPage />
+          </AdminProvider>
+        }
+      />
     </Routes>
   );
 };
