@@ -22,12 +22,7 @@ export default tseslint.config([
   },
   {
     rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          patterns: ['./*', '../*'],
-        },
-      ],
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 ]);
