@@ -67,3 +67,8 @@ export default tseslint.config([
   },
 ])
 ```
+Below are the work in progress design 
+
+<img width="1081" height="900" alt="Screenshot 2025-08-21 at 1 51 53 PM" src="https://github.com/user-attachments/assets/7c2a4e40-2e56-432f-91a8-d7d56f9dc933" />
+<img width="1395" height="821" alt="Screenshot 2025-08-21 at 1 52 02 PM" src="https://github.com/user-attachments/assets/68f1e2fd-c91f-4fd3-95e3-1bc6de2b5704" />
+
